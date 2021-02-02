@@ -1,3 +1,5 @@
 <resources>
-    <string name="app_name">cst438_s21_proj01_group10</string>
+    <string name="app_name">Spotify Thing</string>
+    <string name="login">Log In</string>
+    <string name="create_acct">Create Account</string>
 </resources>
