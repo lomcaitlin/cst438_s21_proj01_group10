@@ -5,7 +5,7 @@
 ### AndroidStudio ###
 # Covers files to be ignored for android development using Android Studio.
 
-./idea/terminal.xml
+.idea/terminal.xml
 
 # Built application files
 *.apk
