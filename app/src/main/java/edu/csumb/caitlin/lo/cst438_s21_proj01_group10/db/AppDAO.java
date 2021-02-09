@@ -24,19 +24,4 @@ public interface AppDAO {
     /* Get user by ID */
     @Query("SELECT * FROM " + AppDatabase.USER_TABLE + " WHERE userId LIKE :userId")
     User getUserById(int userId);
-
-
-    /* Favorites Queries */
-    @Insert
-    void insert(Favorites... favorites);
-
-    @Update
-    void update(Favorites... favorites);
-
-    @Delete
-    void delete(Favorites favorites);
-
-    /* Get all favorites by userId */
-    @Query("SELECT * FROM " + AppDatabase.FAVORITES_TABLE + " WHERE userId LIKE :userId")
-    Favorites getFavoritesByUserId(int userId);
 }
