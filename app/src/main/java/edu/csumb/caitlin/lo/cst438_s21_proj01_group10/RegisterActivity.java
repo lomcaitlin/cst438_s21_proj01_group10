@@ -17,7 +17,7 @@ import edu.csumb.caitlin.lo.cst438_s21_proj01_group10.db.tables.User;
 
 public class RegisterActivity extends AppCompatActivity {
 
-    EditText editTextUsername, editTextEmail, editTextPassword, editTextCnfPassword;
+    EditText editTextUsername, editTextEmail, editTextPassword, editTextCnfPassword, editTextUserId;
     Button buttonRegister;
 
     TextView textViewLogin;
@@ -28,6 +28,7 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
         //identifying input of register credentials
+        editTextUserId = findViewById(R.id.editTextUserId);
         editTextUsername = findViewById(R.id.editTextUsername);
         editTextPassword = findViewById(R.id.editTextPassword);
         editTextCnfPassword = findViewById(R.id.editTextCnfPassword);
@@ -53,12 +54,13 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //grabbing credentials
+                int userId = Integer.parseInt(editTextUserId.getText().toString());
                 String username = editTextUsername.getText().toString().trim();
                 String password = editTextPassword.getText().toString().trim();
                 String passwordConf = editTextCnfPassword.getText().toString().trim();
                 //checking if password and password confirmation matches
                 if (password.equals(passwordConf)) {
-                    User user = new User(username, password);
+                    User user = new User(username, password, userId);
                     appDao.insert(user);
                     Intent moveToLogin = new Intent(RegisterActivity.this, MainActivity.class);
                     startActivity(moveToLogin);

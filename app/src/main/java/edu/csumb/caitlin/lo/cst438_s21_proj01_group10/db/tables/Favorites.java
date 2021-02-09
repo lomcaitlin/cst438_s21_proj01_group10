@@ -1,5 +1,6 @@
 package edu.csumb.caitlin.lo.cst438_s21_proj01_group10.db.tables;
 
+import androidx.annotation.NonNull;
 import androidx.room.*;
 
 import edu.csumb.caitlin.lo.cst438_s21_proj01_group10.db.*;
@@ -13,7 +14,9 @@ import edu.csumb.caitlin.lo.cst438_s21_proj01_group10.db.*;
         )
 public class Favorites {
     private int userId;
+    @NonNull
     private String type;
+    @NonNull
     private String endpoint;
 
     public Favorites(int userId, String type, String endpoint) {

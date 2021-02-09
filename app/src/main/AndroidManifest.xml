@@ -3,7 +3,7 @@
     package="edu.csumb.caitlin.lo.cst438_s21_proj01_group10">
 
     <uses-permission android:name="android.permission.WAKE_LOCK" />
-
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-feature android:name="android.hardware.type.watch" />
 
     <application

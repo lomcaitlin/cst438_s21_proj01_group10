@@ -59,16 +59,16 @@ public class MainActivity extends AppCompatActivity {
                 String username = editTextUsername.getText().toString().trim();
                 String password = editTextPassword.getText().toString().trim();
                 //predefined users
-                User admin = new User("admin","admin");
+                User admin = new User("admin","admin", 1);
                // User testuser1 = new User("testuser1","testuser1");
-                db.insert(admin);
+                //db.insert(admin);
                 //db.insert(testuser1);
                 //getting user from login
                 User user = db.getUserByUsername(username);
 
                 //checking if there is a user
                 if (user != null) {
-                    Intent i = new Intent(MainActivity.this, HomeActivity.class);
+                    Intent i = HomeActivity.getIntent(getApplicationContext(),admin.getUserId());
                     //i.putExtra(ACTIVE_USER_KEY, user);
                     startActivity(i);
                     finish();
