@@ -42,7 +42,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/edit_text_top"
             android:hint="User Id"
-            android:inputType="textPersonName"
+            android:inputType="number"
             android:padding="15dp" />
 
         <EditText

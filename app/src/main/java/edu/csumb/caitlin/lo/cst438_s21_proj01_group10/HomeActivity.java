@@ -33,7 +33,7 @@ public class HomeActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.recyclerView);
         playerList = new ArrayList<>();
 
-        TextView welcomeMsg = findViewById(R.id.welcomeMsg);
+        //TextView welcomeMsg = findViewById(R.id.welcomeMsg);
         id = getIntent().getIntExtra("id", 0);
         //welcomeMsg.setText("Welcome Subject " + id);
 
@@ -52,7 +52,12 @@ public class HomeActivity extends AppCompatActivity {
                 JSONResponse jsonResponse = response.body();
                 playerList = new ArrayList<>(Arrays.asList(jsonResponse.getData()));
 
-                PutDataIntoRecyclerView(playerList);
+                for(PlayerPost post : playerList){
+                    if(id == post.getId()){
+                        PutDataIntoRecyclerView(playerList);
+                    }
+                }
+                //PutDataIntoRecyclerView(playerList);
             }
 
             @Override
