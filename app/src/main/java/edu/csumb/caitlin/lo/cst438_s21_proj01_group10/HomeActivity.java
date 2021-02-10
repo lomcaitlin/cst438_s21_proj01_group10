@@ -6,7 +6,11 @@ import android.os.Bundle;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import retrofit2.Call;
@@ -17,55 +21,51 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class HomeActivity extends AppCompatActivity {
 
-    private TextView textViewResult;
     private int id;
+    RecyclerView recyclerView;
+    List<PlayerPost> playerList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
+        setContentView(R.layout.activity_home2);
 
-        textViewResult = findViewById(R.id.posts);
+        recyclerView = findViewById(R.id.recyclerView);
+        playerList = new ArrayList<>();
 
         TextView welcomeMsg = findViewById(R.id.welcomeMsg);
         id = getIntent().getIntExtra("id", 0);
-        welcomeMsg.setText("Welcome Subject " + id);
+        //welcomeMsg.setText("Welcome Subject " + id);
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://www.balldontlie.io/api/v1/players")
+                .baseUrl("https://www.balldontlie.io/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
-        JsonPlaceHolderApi jsonPlaceHolderApi = retrofit.create(JsonPlaceHolderApi.class);
+        NbaApi nbaApi = retrofit.create(NbaApi.class);
 
-        Call<List<Post>> call = jsonPlaceHolderApi.getPlayers();
+        Call<JSONResponse> call = nbaApi.getPlayers();
 
-        call.enqueue(new Callback<List<Post>>() {
+        call.enqueue(new Callback<JSONResponse>() {
             @Override
-            public void onResponse(Call<List<Post>> call, Response<List<Post>> response) {
-                if (!response.isSuccessful()) {
-                    textViewResult.setText("Code: " + response.code());
-                    return;
-                }
+            public void onResponse(Call<JSONResponse> call, Response<JSONResponse> response) {
+                JSONResponse jsonResponse = response.body();
+                playerList = new ArrayList<>(Arrays.asList(jsonResponse.getData()));
 
-                List<Post> posts = response.body();
-
-                for (Post post : posts) {
-                    if (id == post.getPlayerId()) {
-                        String content = "";
-                        content += "Player ID: " + post.getPlayerId() + "\n";
-                        content += "First Name: " + post.getfName() + "\n";
-                        content += "Last Name: " + post.getlName() + "\n\n";
-                        textViewResult.append(content);
-                    }
-                }
+                PutDataIntoRecyclerView(playerList);
             }
 
             @Override
-            public void onFailure(Call<List<Post>> call, Throwable t) {
-                textViewResult.setText(t.getMessage());
+            public void onFailure(Call<JSONResponse> call, Throwable t) {
+
             }
         });
+    }
+
+    private void PutDataIntoRecyclerView(List<PlayerPost> playerList){
+        Adaptery adaptery = new Adaptery(this, playerList);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(adaptery);
     }
 
     public static Intent getIntent(Context context, int id) {
