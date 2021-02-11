@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
                 String username = editTextUsername.getText().toString().trim();
                 String password = editTextPassword.getText().toString().trim();
                 //predefined users
-                User admin = new User("admin","admin", 1);
+                User admin = new User("admin","admin");
                // User testuser1 = new User("testuser1","testuser1");
                 //db.insert(admin);
                 //db.insert(testuser1);
@@ -68,10 +68,8 @@ public class MainActivity extends AppCompatActivity {
 
                 //checking if there is a user
                 if (user != null) {
-                    Intent i = HomeActivity.getIntent(getApplicationContext(),admin.getUserId());
-                    //i.putExtra(ACTIVE_USER_KEY, user);
+                    Intent i = HomeActivity.getIntent(getApplicationContext(),user.getUserId());
                     startActivity(i);
-                    finish();
                 }else{
                     Toast.makeText(MainActivity.this, "Unregistered user, or incorrect password", Toast.LENGTH_SHORT).show();
                 }
