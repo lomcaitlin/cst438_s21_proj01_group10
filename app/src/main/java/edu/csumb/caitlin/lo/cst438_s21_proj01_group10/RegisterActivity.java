@@ -17,7 +17,7 @@ import edu.csumb.caitlin.lo.cst438_s21_proj01_group10.db.tables.User;
 
 public class RegisterActivity extends AppCompatActivity {
 
-    EditText editTextUsername, editTextEmail, editTextPassword, editTextCnfPassword;
+    EditText editTextUsername, editTextPassword, editTextCnfPassword;
     Button buttonRegister;
 
     TextView textViewLogin;
@@ -53,7 +53,6 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //grabbing credentials
-                //int userId = Integer.parseInt(editTextUserId.getText().toString());
                 String username = editTextUsername.getText().toString().trim();
                 String password = editTextPassword.getText().toString().trim();
                 String passwordConf = editTextCnfPassword.getText().toString().trim();

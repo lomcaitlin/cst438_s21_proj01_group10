@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
                 String username = editTextUsername.getText().toString().trim();
                 String password = editTextPassword.getText().toString().trim();
                 //predefined users
-                User admin = new User("admin","admin");
+                //User admin = new User("admin","admin");
                // User testuser1 = new User("testuser1","testuser1");
                 //db.insert(admin);
                 //db.insert(testuser1);

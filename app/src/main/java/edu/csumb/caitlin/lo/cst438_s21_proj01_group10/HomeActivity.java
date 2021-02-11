@@ -21,16 +21,16 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class HomeActivity extends AppCompatActivity {
 
+    private TextView textViewResult;
     private int id;
-    RecyclerView recyclerView;
     List<PlayerPost> playerList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home2);
+        setContentView(R.layout.activity_home);
 
-        recyclerView = findViewById(R.id.recyclerView);
+        textViewResult = findViewById(R.id.playerPosts);
         playerList = new ArrayList<>();
 
         //TextView welcomeMsg = findViewById(R.id.welcomeMsg);
@@ -51,13 +51,16 @@ public class HomeActivity extends AppCompatActivity {
             public void onResponse(Call<JSONResponse> call, Response<JSONResponse> response) {
                 JSONResponse jsonResponse = response.body();
                 playerList = new ArrayList<>(Arrays.asList(jsonResponse.getData()));
-
                 for(PlayerPost post : playerList){
                     if(id == post.getId()){
-                        PutDataIntoRecyclerView(playerList);
+                        String content ="";
+                        content += "First Name: " + post.getFirst_name() + "\n";
+                        content += "Last Name: " + post.getLast_name() + "\n";
+                        content += "Player ID: " + post.getId() + "\n";
+                        textViewResult.append(content);
                     }
+
                 }
-                //PutDataIntoRecyclerView(playerList);
             }
 
             @Override
@@ -67,11 +70,6 @@ public class HomeActivity extends AppCompatActivity {
         });
     }
 
-    private void PutDataIntoRecyclerView(List<PlayerPost> playerList){
-        Adaptery adaptery = new Adaptery(this, playerList);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(adaptery);
-    }
 
     public static Intent getIntent(Context context, int id) {
         Intent intent = new Intent(context, HomeActivity.class);
