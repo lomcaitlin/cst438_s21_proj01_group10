@@ -27,23 +27,14 @@
 
     <LinearLayout
         android:id="@+id/input_group"
-        android:layout_width="362dp"
-        android:layout_height="370dp"
+        android:layout_width="359dp"
+        android:layout_height="321dp"
         android:layout_alignParentBottom="true"
         android:layout_marginLeft="25dp"
         android:layout_marginRight="25dp"
         android:layout_marginBottom="40dp"
         android:gravity="center"
         android:orientation="vertical">
-
-        <EditText
-            android:id="@+id/editTextUserId"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/edit_text_top"
-            android:hint="User Id"
-            android:inputType="number"
-            android:padding="15dp" />
 
         <EditText
             android:id="@+id/editTextUsername"
