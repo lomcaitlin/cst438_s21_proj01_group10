@@ -4,6 +4,7 @@
 
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.INTERNET" />
+
     <uses-feature android:name="android.hardware.type.watch" />
 
     <application
@@ -13,7 +14,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Cst438_s21_proj01_group10">
-        <activity android:name=".HomeActivity"></activity>
+        <activity android:name=".SearchPlayer"></activity>
+        <activity android:name=".HomeActivity" />
         <activity
             android:name=".RegisterActivity"
             android:label="@string/title_activity_register">
