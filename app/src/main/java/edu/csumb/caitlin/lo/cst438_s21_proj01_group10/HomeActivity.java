@@ -16,18 +16,13 @@ public class HomeActivity extends AppCompatActivity {
     private Button addTeamButton;
     private Button searchGameButton;
     private Button userSettingsButton;
-
+    private int userId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        display();
-
-    }
-
-    private void display(){
         addTeamButton = findViewById(R.id.addTeamButton);
         searchGameButton = findViewById(R.id.searchGameButton);
         userSettingsButton = findViewById(R.id.userSettingsButton);
@@ -37,7 +32,7 @@ public class HomeActivity extends AppCompatActivity {
         addTeamButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = AddTeamActivity.getIntent(getApplicationContext());
+                Intent intent = AddTeamActivity.getIntent(getApplicationContext(),userId);
                 startActivity(intent);
             }
         });
@@ -58,8 +53,9 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
-
     }
+
+
 
 
     public static Intent getIntent(Context context, int id) {
