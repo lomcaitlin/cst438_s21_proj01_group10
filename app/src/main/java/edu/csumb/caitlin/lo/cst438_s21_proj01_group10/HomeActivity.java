@@ -13,7 +13,6 @@ import edu.csumb.caitlin.lo.cst438_s21_proj01_group10.db.tables.User;
 
 public class HomeActivity extends AppCompatActivity {
 
-    private Button addPlayerButton;
     private Button addTeamButton;
     private Button searchGameButton;
     private Button userSettingsButton;
@@ -29,18 +28,11 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     private void display(){
-        addPlayerButton = findViewById(R.id.addPlayerButton);
         addTeamButton = findViewById(R.id.addTeamButton);
         searchGameButton = findViewById(R.id.searchGameButton);
         userSettingsButton = findViewById(R.id.userSettingsButton);
 
-        addPlayerButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = AddPlayerActivity.getIntent(getApplicationContext());
-                startActivity(intent);
-            }
-        });
+
 
         addTeamButton.setOnClickListener(new View.OnClickListener() {
             @Override
