@@ -49,7 +49,7 @@ public class HomeActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        
+
         searchGameButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
