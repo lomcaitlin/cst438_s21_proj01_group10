@@ -15,7 +15,7 @@
         android:layout_marginEnd="105dp"
         android:layout_marginBottom="16dp"
         android:ems="10"
-        android:hint="Enter Team ID"
+        android:hint="Enter Team ID 1-30"
         android:inputType="text"
         app:layout_constraintBottom_toTopOf="@+id/teamSearchButton"
         app:layout_constraintEnd_toEndOf="parent"

@@ -12,5 +12,5 @@ public interface NbaApi {
     Call<JSONResponse> getPlayers();
 
     @GET("api/v1/teams/{id}")
-    Call<List<TeamPost>> getTeams(@Path("id") int teamId);
+    Call<TeamPost> getTeams(@Path("id") int teamId);
 }

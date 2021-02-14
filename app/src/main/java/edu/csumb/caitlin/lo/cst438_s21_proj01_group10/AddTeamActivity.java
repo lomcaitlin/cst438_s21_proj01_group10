@@ -51,28 +51,27 @@ public class AddTeamActivity extends AppCompatActivity {
                 String value = editTextTeamId.getText().toString();
                 teamId = Integer.parseInt(value);
 
-                Call<List<TeamPost>> call = nbaApi.getTeams(teamId);
+                Call<TeamPost> call = nbaApi.getTeams(teamId);
 
-                call.enqueue(new Callback<List<TeamPost>>() {
+                call.enqueue(new Callback<TeamPost>() {
                     @Override
-                    public void onResponse(Call<List<TeamPost>> call, Response<List<TeamPost>> response) {
+                    public void onResponse(Call<TeamPost> call, Response<TeamPost> response) {
+                        TeamPost post = response.body();
 
-                        List<TeamPost> teamPosts = response.body();
-
-                        for(TeamPost post : teamPosts){
                                 String content = "";
                                 content += "Full Name: " + post.getFull_name() + "\n";
+                                content += "City: " + post.getCity() + "\n";
+                                content += "Abbreviation: " + post.getAbbreviation() + "\n";
+                                content += "Conference: " + post.getConference() + "\n";
                                 textViewTeamResult.append(content);
-                        }
-
-
 
                         }
 
                     @Override
-                    public void onFailure(Call<List<TeamPost>> call, Throwable t) {
+                    public void onFailure(Call<TeamPost> call, Throwable t) {
 
                     }
+
                 });
 
             }
