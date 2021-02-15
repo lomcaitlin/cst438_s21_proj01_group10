@@ -50,6 +50,10 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 getCredentials();
+                if (appDao.getUserByUsername(username) != null) {
+                    Toast.makeText(RegisterActivity.this, "Username taken", Toast.LENGTH_SHORT).show();
+                    editTextUsername.requestFocus();
+                }
                 //checking if password and password confirmation matches
                 if (password.equals(passwordConf)) {
                     User user = new User(username, password);
