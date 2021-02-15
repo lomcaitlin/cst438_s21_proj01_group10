@@ -4,6 +4,7 @@
 
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.INTERNET" />
+
     <uses-feature android:name="android.hardware.type.watch" />
 
     <application
@@ -16,6 +17,7 @@
         <activity android:name=".HomeActivity"></activity>
         <activity android:name=".AddTeamActivity"></activity>
         <activity android:name=".SearchGameActivity"></activity>
+        <activity android:name=".SearchPlayer"></activity>
         <activity
             android:name=".RegisterActivity"
             android:label="@string/title_activity_register">
