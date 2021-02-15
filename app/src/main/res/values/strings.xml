@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">cst438_s21_proj01_group10</string>
     <string name="title_activity_register">RegisterActivity</string>
+    <string name="search_player">Search Player</string>
     <!--
     This string is used for square devices and overridden by hello_world in
     values-round/strings.xml for round devices.
@@ -10,4 +11,5 @@
     <string name="search_game">Search Game</string>
     <string name="add_team">Add Team</string>
     <string name="add_player">Add Player</string>
+    <string name="search_player_search">Search Player Name...</string>
 </resources>
