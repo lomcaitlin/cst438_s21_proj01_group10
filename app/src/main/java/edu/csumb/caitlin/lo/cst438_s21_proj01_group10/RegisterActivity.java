@@ -3,6 +3,7 @@ package edu.csumb.caitlin.lo.cst438_s21_proj01_group10;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Room;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -19,55 +20,85 @@ public class RegisterActivity extends AppCompatActivity {
 
     EditText editTextUsername, editTextPassword, editTextCnfPassword;
     Button buttonRegister;
-
     TextView textViewLogin;
+
+    String username;
+    String password;
+    String passwordConf;
+
     private AppDAO appDao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-        //identifying input of register credentials
-        editTextUsername = findViewById(R.id.editTextUsername);
-        editTextPassword = findViewById(R.id.editTextPassword);
-        editTextCnfPassword = findViewById(R.id.editTextCnfPassword);
-        buttonRegister = findViewById(R.id.buttonRegister);
 
+        connectToDisplay();
+        getDB();
 
-
-        textViewLogin = findViewById(R.id.textViewLogin);
         //after clicking login with good credentials will send user to login screen
         textViewLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(RegisterActivity.this, MainActivity.class));
+                startActivity(MainActivity.getIntent(getApplicationContext()));
             }
         });
-//grabbing data
-        appDao = Room.databaseBuilder(this, AppDatabase.class, "cst438_group10.db").allowMainThreadQueries()
-                .build().getAppDAO();
 
 
 
         buttonRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //grabbing credentials
-                String username = editTextUsername.getText().toString().trim();
-                String password = editTextPassword.getText().toString().trim();
-                String passwordConf = editTextCnfPassword.getText().toString().trim();
+                getCredentials();
                 //checking if password and password confirmation matches
                 if (password.equals(passwordConf)) {
                     User user = new User(username, password);
                     appDao.insert(user);
-                    Intent moveToLogin = new Intent(RegisterActivity.this, MainActivity.class);
-                    startActivity(moveToLogin);
-                    // if passwords don't match then display toast error
+                    startActivity(MainActivity.getIntent(getApplicationContext()));
                 } else {
-                    Toast.makeText(RegisterActivity.this, "Passwords are not matching", Toast.LENGTH_SHORT).show();
-
+                    Toast.makeText(RegisterActivity.this, "Passwords do not match", Toast.LENGTH_SHORT).show();
                 }
             }
         });
+    }
+
+    /**
+     * Connect display elements to variables
+     */
+    private void connectToDisplay() {
+        editTextUsername = findViewById(R.id.editTextUsername);
+        editTextPassword = findViewById(R.id.editTextPassword);
+        editTextCnfPassword = findViewById(R.id.editTextCnfPassword);
+        buttonRegister = findViewById(R.id.buttonRegister);
+        textViewLogin = findViewById(R.id.textViewLogin);
+    }
+
+    /**
+     * connect to AppDAO
+     */
+    private void getDB() {
+        appDao = Room.databaseBuilder(this, AppDatabase.class, "cst438_group10.db")
+                .allowMainThreadQueries()
+                .build()
+                .getAppDAO();
+    }
+
+    /**
+     * get user input
+     */
+    private void getCredentials() {
+        username = editTextUsername.getText().toString().trim();
+        password = editTextPassword.getText().toString().trim();
+        passwordConf = editTextCnfPassword.getText().toString().trim();
+    }
+
+    /**
+     * Factory pattern intent
+     * @param context
+     * @return
+     */
+    public static Intent getIntent(Context context) {
+        Intent intent = new Intent(context, RegisterActivity.class);
+        return intent;
     }
 }

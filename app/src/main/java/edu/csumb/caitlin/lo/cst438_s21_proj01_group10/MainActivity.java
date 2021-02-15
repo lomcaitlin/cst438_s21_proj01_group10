@@ -103,7 +103,7 @@ public class MainActivity extends AppCompatActivity {
      * @param context
      * @return
      */
-    public static Intent intent(Context context) {
+    public static Intent getIntent(Context context) {
         Intent intent = new Intent(context, MainActivity.class);
         return intent;
     }
