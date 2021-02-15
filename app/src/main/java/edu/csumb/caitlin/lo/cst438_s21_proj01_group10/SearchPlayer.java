@@ -105,7 +105,13 @@ public class SearchPlayer extends AppCompatActivity {
                     return;
                 }
                 PlayerPost player = response.body();
-                playerList.setText(player.getFirst_name() + " " + player.getLast_name());
+                String info = "";
+                info += "\nPlayer Name: " + player.getFirst_name() + " " + player.getLast_name() + "\n";
+                if (player.getHeight_feet() != null && player.getHeight_inches() != null) {
+                    info += "Height: " + player.getHeight_feet() + "\' " + player.getHeight_inches() + "\"\n";
+                }
+                info += "Position: " + player.getPosition() + "\n";
+                playerList.setText(info);
             }
 
             @Override
