@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AddTeamActivity">
+    tools:context=".SearchGameActivity">
 
     <EditText
         android:id="@+id/editTextGameId"
@@ -15,7 +15,7 @@
         android:layout_marginEnd="105dp"
         android:layout_marginBottom="16dp"
         android:ems="10"
-        android:hint="Enter Team ID 1-30"
+        android:hint="Enter Game ID"
         android:inputType="text"
         app:layout_constraintBottom_toTopOf="@+id/gameSearchButton"
         app:layout_constraintEnd_toEndOf="parent"

@@ -3,15 +3,12 @@ package edu.csumb.caitlin.lo.cst438_s21_proj01_group10;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
-
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -32,9 +29,9 @@ public class AddTeamActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_team);
 
-        textViewTeamResult = findViewById(R.id.textViewTeamResult);
-        editTextTeamId = findViewById(R.id.editTextTeamId);
-        teamSearchButton = findViewById(R.id.teamSearchButton);
+        textViewTeamResult = findViewById(R.id.textViewGameResult);
+        editTextTeamId = findViewById(R.id.editTextGameId);
+        teamSearchButton = findViewById(R.id.gameSearchButton);
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://www.balldontlie.io/")
@@ -47,7 +44,7 @@ public class AddTeamActivity extends AppCompatActivity {
         teamSearchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                textViewTeamResult.setText("");
                 String value = editTextTeamId.getText().toString();
                 teamId = Integer.parseInt(value);
 
