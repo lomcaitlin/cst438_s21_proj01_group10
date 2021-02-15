@@ -3,6 +3,7 @@ package edu.csumb.caitlin.lo.cst438_s21_proj01_group10;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Room;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -76,5 +77,15 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    /**
+     * Factory pattern intent
+     * @param context
+     * @return
+     */
+    public static Intent intent(Context context) {
+        Intent intent = new Intent(context, MainActivity.class);
+        return intent;
     }
 }
