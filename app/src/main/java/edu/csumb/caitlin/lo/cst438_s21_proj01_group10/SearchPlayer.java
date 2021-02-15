@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
@@ -31,6 +32,7 @@ public class SearchPlayer extends AppCompatActivity {
     /* API variables */
     private NbaApi nbaApi;
     private HashMap<String,Integer> playersHash;
+    private List<String> playerNames;
     private int userId;
 
     @Override
@@ -66,9 +68,9 @@ public class SearchPlayer extends AppCompatActivity {
         searchPlayer = findViewById(R.id.search_player_autocomplete);
         playerList = findViewById(R.id.search_player_list);
         search = findViewById(R.id.search_player_button);
-        List<String> players = new ArrayList<>(playersHash.keySet());
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_dropdown_item_1line, players);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
+                android.R.layout.simple_dropdown_item_1line, playerNames);
+        searchPlayer.setAdapter(adapter);
     }
 
     /**
@@ -103,7 +105,7 @@ public class SearchPlayer extends AppCompatActivity {
                     return;
                 }
                 PlayerPost player = response.body();
-                playerList.setText("");
+                playerList.setText(player.getFirst_name() + " " + player.getLast_name());
             }
 
             @Override
@@ -118,25 +120,29 @@ public class SearchPlayer extends AppCompatActivity {
      */
     private void getInitialPlayers() {
         playersHash = new HashMap<>();
-        Call<List<PlayerPost>> call = nbaApi.getAllPlayers();
-        call.enqueue(new Callback<List<PlayerPost>>() {
+        playerNames = new ArrayList<>();
+        Call<JSONResponse> call = nbaApi.getPlayers();
+        call.enqueue(new Callback<JSONResponse>() {
             @Override
-            public void onResponse(Call<List<PlayerPost>> call, Response<List<PlayerPost>> response) {
+            public void onResponse(Call<JSONResponse> call, Response<JSONResponse> response) {
                 if(!response.isSuccessful()) {
                     playerList.setText("Code: " + response.code());
                     return;
                 }
-                List<PlayerPost> players = response.body();
-                for (PlayerPost player : players) {
+                JSONResponse jsonResponse = response.body();
+                List<PlayerPost> playerList = new ArrayList<>(Arrays.asList(jsonResponse.getData()));
+                for (PlayerPost player : playerList) {
                     playersHash.put(player.getFirst_name() + " " + player.getLast_name(), player.getId());
+                    playerNames.add(player.getFirst_name() + " " + player.getLast_name());
                 }
             }
 
             @Override
-            public void onFailure(Call<List<PlayerPost>> call, Throwable t) {
+            public void onFailure(Call<JSONResponse> call, Throwable t) {
                 playerList.setText(t.getMessage());
             }
         });
+
     }
 
     /**
