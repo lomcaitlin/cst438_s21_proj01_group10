@@ -6,16 +6,49 @@
     android:layout_height="match_parent"
     tools:context=".HomeActivity">
 
+    <Button
+        android:id="@+id/userSettingsButton"
+        android:layout_width="85dp"
+        android:layout_height="56dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="4dp"
+        android:text="@string/settings"
+        android:textSize="10sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/searchGameButton"
+        android:layout_width="75dp"
+        android:layout_height="55dp"
+        android:layout_marginStart="38dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/search_game"
+        android:textSize="10sp"
+        app:layout_constraintStart_toEndOf="@+id/addTeamButton"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/addTeamButton"
+        android:layout_width="73dp"
+        android:layout_height="56dp"
+        android:layout_marginStart="22dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="38dp"
+        android:text="@string/add_team"
+        android:textSize="10sp"
+        app:layout_constraintEnd_toStartOf="@+id/searchGameButton"
+        app:layout_constraintStart_toEndOf="@+id/addPlayerButton"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <androidx.core.widget.NestedScrollView
         android:id="@+id/nestedScrollView"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/welcomeMsg">
+        app:layout_constraintStart_toStartOf="parent">
 
         <TextView
             android:id="@+id/playerPosts"
@@ -29,21 +62,14 @@
 
     </androidx.core.widget.NestedScrollView>
 
-    <TextView
-        android:id="@+id/welcomeMsg"
-        android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginBottom="10dp"
-        android:text="Your Chosen Player"
-        android:textSize="20dp"
-        android:textAlignment="center"
-        android:textColor="#000"
-        android:visibility="visible"
-        app:layout_constraintBottom_toTopOf="@+id/nestedScrollView"
-        app:layout_constraintEnd_toEndOf="parent"
+    <Button
+        android:id="@+id/addPlayerButton"
+        android:layout_width="73dp"
+        android:layout_height="56dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/add_player"
+        android:textSize="10sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

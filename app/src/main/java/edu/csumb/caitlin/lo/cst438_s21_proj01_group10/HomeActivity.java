@@ -3,72 +3,59 @@ package edu.csumb.caitlin.lo.cst438_s21_proj01_group10;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.TextView;
+import android.view.View;
+import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import edu.csumb.caitlin.lo.cst438_s21_proj01_group10.db.tables.User;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class HomeActivity extends AppCompatActivity {
 
-    private TextView textViewResult;
-    private int id;
-    List<PlayerPost> playerList;
+    private Button addTeamButton;
+    private Button searchGameButton;
+    private Button userSettingsButton;
+    private int userId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        textViewResult = findViewById(R.id.playerPosts);
-        playerList = new ArrayList<>();
+        addTeamButton = findViewById(R.id.addTeamButton);
+        searchGameButton = findViewById(R.id.searchGameButton);
+        userSettingsButton = findViewById(R.id.userSettingsButton);
 
-        //TextView welcomeMsg = findViewById(R.id.welcomeMsg);
-        id = getIntent().getIntExtra("id", 0);
-        //welcomeMsg.setText("Welcome Subject " + id);
 
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://www.balldontlie.io/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
 
-        NbaApi nbaApi = retrofit.create(NbaApi.class);
-
-        Call<JSONResponse> call = nbaApi.getPlayers();
-
-        call.enqueue(new Callback<JSONResponse>() {
+        addTeamButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onResponse(Call<JSONResponse> call, Response<JSONResponse> response) {
-                JSONResponse jsonResponse = response.body();
-                playerList = new ArrayList<>(Arrays.asList(jsonResponse.getData()));
-                for(PlayerPost post : playerList){
-                    if(id == post.getId()){
-                        String content ="";
-                        content += "First Name: " + post.getFirst_name() + "\n";
-                        content += "Last Name: " + post.getLast_name() + "\n";
-                        content += "Player ID: " + post.getId() + "\n";
-                        textViewResult.append(content);
-                    }
-
-                }
-            }
-
-            @Override
-            public void onFailure(Call<JSONResponse> call, Throwable t) {
-
+            public void onClick(View v) {
+                Intent intent = AddTeamActivity.getIntent(getApplicationContext(),userId);
+                startActivity(intent);
             }
         });
+
+        searchGameButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = SearchGameActivity.getIntent(getApplicationContext());
+                startActivity(intent);
+            }
+        });
+
+        userSettingsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = UserSettingsActivity.getIntent(getApplicationContext());
+                startActivity(intent);
+            }
+        });
+
     }
+
+
 
 
     public static Intent getIntent(Context context, int id) {
