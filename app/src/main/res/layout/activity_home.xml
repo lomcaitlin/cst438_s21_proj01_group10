@@ -12,8 +12,8 @@
         android:layout_width="116dp"
         android:layout_height="80dp"
         android:layout_marginStart="15dp"
-        android:layout_marginTop="79dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginTop="70dp"
+        android:layout_marginEnd="15dp"
         android:text="My Team"
         android:textSize="18sp"
         app:layout_constraintEnd_toStartOf="@+id/editFavButton"
@@ -24,48 +24,44 @@
         android:id="@+id/editFavButton"
         android:layout_width="116dp"
         android:layout_height="80dp"
-        android:layout_marginStart="9dp"
-        android:layout_marginTop="79dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginEnd="10dp"
         android:text="Edit Favorites"
         android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="@+id/myTeamButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/myTeamButton"
-        app:layout_constraintTop_toBottomOf="@+id/searchGameButton" />
+        app:layout_constraintTop_toTopOf="@+id/myTeamButton" />
 
     <Button
         android:id="@+id/userSettingsButton"
         android:layout_width="116dp"
         android:layout_height="80dp"
-        android:layout_marginStart="147dp"
-        android:layout_marginEnd="148dp"
-        android:layout_marginBottom="207dp"
+        android:layout_marginTop="70dp"
         android:text="@string/settings"
         android:textSize="15sp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/myTeamButton" />
 
     <Button
         android:id="@+id/searchGameButton"
         android:layout_width="116dp"
         android:layout_height="80dp"
-        android:layout_marginStart="9dp"
-        android:layout_marginTop="34dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginEnd="10dp"
         android:text="@string/search_game"
         android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/addTeamButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/addTeamButton"
-        app:layout_constraintTop_toBottomOf="@+id/homePageTitleTextView" />
+        app:layout_constraintTop_toTopOf="@+id/addTeamButton" />
 
     <Button
         android:id="@+id/addTeamButton"
         android:layout_width="116dp"
         android:layout_height="80dp"
         android:layout_marginStart="15dp"
-        android:layout_marginTop="34dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginTop="35dp"
+        android:layout_marginEnd="15dp"
         android:text="@string/add_team"
         android:textSize="18sp"
         app:layout_constraintEnd_toStartOf="@+id/searchGameButton"
@@ -97,27 +93,25 @@
         android:id="@+id/addPlayerButton"
         android:layout_width="116dp"
         android:layout_height="80dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="34dp"
-        android:layout_marginEnd="15dp"
+        android:layout_marginStart="10dp"
         android:text="@string/add_player"
         android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/addTeamButton"
         app:layout_constraintEnd_toStartOf="@+id/addTeamButton"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/homePageTitleTextView" />
+        app:layout_constraintTop_toTopOf="@+id/addTeamButton" />
 
     <Button
         android:id="@+id/myPlayerButton"
         android:layout_width="116dp"
         android:layout_height="80dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="79dp"
-        android:layout_marginEnd="15dp"
+        android:layout_marginStart="10dp"
         android:text="My Player"
         android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/myTeamButton"
         app:layout_constraintEnd_toStartOf="@+id/myTeamButton"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/addPlayerButton" />
+        app:layout_constraintTop_toTopOf="@+id/myTeamButton" />
 
     <TextView
         android:id="@+id/homePageTitleTextView"
