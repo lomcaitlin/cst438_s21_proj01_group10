@@ -53,9 +53,12 @@ public class MainActivity extends AppCompatActivity {
                 if (user != null) {
                     if (validatePassword()) {
                         startActivity(HomeActivity.getIntent(getApplicationContext(),user.getUserId()));
+                    } else {
+                        editTextPassword.requestFocus();
+                        Toast.makeText(MainActivity.this, "Invalid password", Toast.LENGTH_SHORT).show();
                     }
-                    Toast.makeText(MainActivity.this, "Invalid password", Toast.LENGTH_SHORT).show();
                 }else{
+                    editTextUsername.requestFocus();
                     Toast.makeText(MainActivity.this, "User does not exist", Toast.LENGTH_SHORT).show();
                 }
             }

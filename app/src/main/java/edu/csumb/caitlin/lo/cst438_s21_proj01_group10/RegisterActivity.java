@@ -51,16 +51,15 @@ public class RegisterActivity extends AppCompatActivity {
             public void onClick(View v) {
                 getCredentials();
                 if (appDao.getUserByUsername(username) != null) {
-                    Toast.makeText(RegisterActivity.this, "Username taken", Toast.LENGTH_SHORT).show();
                     editTextUsername.requestFocus();
-                }
-                //checking if password and password confirmation matches
-                if (password.equals(passwordConf)) {
+                    Toast.makeText(RegisterActivity.this, "Username taken", Toast.LENGTH_SHORT).show();
+                }else if (!password.equals(passwordConf)) {
+                    editTextPassword.requestFocus();
+                    Toast.makeText(RegisterActivity.this, "Passwords do not match", Toast.LENGTH_SHORT).show();
+                } else {
                     User user = new User(username, password);
                     appDao.insert(user);
                     startActivity(MainActivity.getIntent(getApplicationContext()));
-                } else {
-                    Toast.makeText(RegisterActivity.this, "Passwords do not match", Toast.LENGTH_SHORT).show();
                 }
             }
         });
