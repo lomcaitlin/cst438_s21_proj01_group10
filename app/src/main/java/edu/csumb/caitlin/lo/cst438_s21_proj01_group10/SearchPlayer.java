@@ -1,6 +1,7 @@
 package edu.csumb.caitlin.lo.cst438_s21_proj01_group10;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.room.Room;
 
 import android.content.Context;
 import android.content.Intent;
@@ -10,12 +11,16 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
+import edu.csumb.caitlin.lo.cst438_s21_proj01_group10.db.AppDAO;
+import edu.csumb.caitlin.lo.cst438_s21_proj01_group10.db.AppDatabase;
+import edu.csumb.caitlin.lo.cst438_s21_proj01_group10.db.tables.Favorites;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -34,6 +39,8 @@ public class SearchPlayer extends AppCompatActivity {
     private NbaApi nbaApi;
     private HashMap<String,Integer> playersHash;
     private List<String> playerNames;
+
+    private AppDAO appDao;
     private int userId;
 
     @Override
@@ -41,6 +48,7 @@ public class SearchPlayer extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_player);
 
+        getDB();
         getUserId();
         buildRetrofit();
         getInitialPlayers();
@@ -49,8 +57,17 @@ public class SearchPlayer extends AppCompatActivity {
         search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int playerId = getPlayerId();
-                getPlayerInfo(playerId);
+                if (getPlayerId() < 0) {
+                    searchPlayer.requestFocus();
+                }
+                getPlayerInfo(getPlayerId());
+            }
+        });
+
+        add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addToFavorites(getPlayerId());
             }
         });
     }
@@ -92,6 +109,9 @@ public class SearchPlayer extends AppCompatActivity {
      * get player name from autofill text
      */
     private int getPlayerId() {
+        if (playersHash.get(searchPlayer.getText().toString()) == null) {
+            return -1;
+        }
         return playersHash.get(searchPlayer.getText().toString());
     }
 
@@ -104,7 +124,7 @@ public class SearchPlayer extends AppCompatActivity {
             @Override
             public void onResponse(Call<PlayerPost> call, Response<PlayerPost> response) {
                 if(!response.isSuccessful()) {
-                    playerList.setText("Code: " + response.code());
+                    playerList.setText("Error Code: " + response.code());
                     add.setVisibility(View.INVISIBLE);
                     return;
                 }
@@ -155,6 +175,45 @@ public class SearchPlayer extends AppCompatActivity {
             }
         });
 
+    }
+
+    /**
+     * connect to db
+     */
+    private void getDB() {
+        appDao = Room.databaseBuilder(this, AppDatabase.class, AppDatabase.DB_NAME)
+                .allowMainThreadQueries()
+                .build()
+                .getAppDAO();
+    }
+
+    /**
+     * add to favorites
+     * @param playerId
+     */
+    private void addToFavorites(Integer playerId) {
+        if (userId < 0) {
+            Toast.makeText(SearchPlayer.this, "Add failure: not signed in", Toast.LENGTH_SHORT).show();
+            startActivity(MainActivity.getIntent(getApplicationContext()));
+            return;
+        } else if (!favoriteExists(playerId)){
+            Favorites addPlayer = new Favorites(userId, "players", playerId.toString());
+            appDao.insert(addPlayer);
+            Toast.makeText(SearchPlayer.this, "Added to favorites", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    /**
+     * If favorite already exists, return true
+     * @param playerId
+     * @return
+     */
+    private boolean favoriteExists(Integer playerId) {
+        if (appDao.getFavoriteByPrimaryKey(userId, "players", playerId.toString()) != null) {
+            Toast.makeText(SearchPlayer.this, "Already added to favorites", Toast.LENGTH_SHORT).show();
+            return true;
+        }
+        return false;
     }
 
     /**
