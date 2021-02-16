@@ -27,6 +27,7 @@ public class SearchPlayer extends AppCompatActivity {
     /* Display variables */
     private AutoCompleteTextView searchPlayer;
     private TextView playerList;
+    private Button add;
     private Button search;
 
     /* API variables */
@@ -67,6 +68,8 @@ public class SearchPlayer extends AppCompatActivity {
     private void connectToDisplay() {
         searchPlayer = findViewById(R.id.search_player_autocomplete);
         playerList = findViewById(R.id.search_player_list);
+        add = findViewById(R.id.add_player_fav_button);
+        add.setVisibility(View.INVISIBLE);
         search = findViewById(R.id.search_player_button);
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_dropdown_item_1line, playerNames);
@@ -102,6 +105,7 @@ public class SearchPlayer extends AppCompatActivity {
             public void onResponse(Call<PlayerPost> call, Response<PlayerPost> response) {
                 if(!response.isSuccessful()) {
                     playerList.setText("Code: " + response.code());
+                    add.setVisibility(View.INVISIBLE);
                     return;
                 }
                 PlayerPost player = response.body();
@@ -112,11 +116,13 @@ public class SearchPlayer extends AppCompatActivity {
                 }
                 info += "Position: " + player.getPosition() + "\n";
                 playerList.setText(info);
+                add.setVisibility(View.VISIBLE);
             }
 
             @Override
             public void onFailure(Call<PlayerPost> call, Throwable t) {
                 playerList.setText(t.getMessage());
+                add.setVisibility(View.INVISIBLE);
             }
         });
     }
