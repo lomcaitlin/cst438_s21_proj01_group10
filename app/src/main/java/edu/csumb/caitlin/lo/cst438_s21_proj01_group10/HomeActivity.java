@@ -17,6 +17,9 @@ public class HomeActivity extends AppCompatActivity {
     private Button addTeamButton;
     private Button searchGameButton;
     private Button userSettingsButton;
+    private Button myPlayerButton;
+    private Button myTeamButton;
+    private Button editFavButton;
     private int userId;
 
     @Override
@@ -30,6 +33,9 @@ public class HomeActivity extends AppCompatActivity {
         addTeamButton = findViewById(R.id.addTeamButton);
         searchGameButton = findViewById(R.id.searchGameButton);
         userSettingsButton = findViewById(R.id.userSettingsButton);
+        myPlayerButton = findViewById(R.id.myPlayerButton);
+        myTeamButton = findViewById(R.id.myTeamButton);
+        editFavButton = findViewById(R.id.editFavButton);
 
         addPlayerButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,6 +65,30 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = UserSettingsActivity.getIntent(getApplicationContext());
+                startActivity(intent);
+            }
+        });
+
+        myPlayerButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = MyPlayerActivity.getIntent(getApplicationContext(),userId);
+                startActivity(intent);
+            }
+        });
+
+        myTeamButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = MyTeamActivity.getIntent(getApplicationContext(),userId);
+                startActivity(intent);
+            }
+        });
+
+        editFavButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = EditFavoritesActivity.getIntent(getApplicationContext(),userId);
                 startActivity(intent);
             }
         });

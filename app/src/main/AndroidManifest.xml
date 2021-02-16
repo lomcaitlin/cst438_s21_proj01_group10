@@ -18,6 +18,9 @@
         <activity android:name=".AddTeamActivity"></activity>
         <activity android:name=".SearchGameActivity"></activity>
         <activity android:name=".SearchPlayer"></activity>
+        <activity android:name=".EditFavoritesActivity"></activity>
+        <activity android:name=".MyPlayerActivity"></activity>
+        <activity android:name=".MyTeamActivity"></activity>
         <activity
             android:name=".RegisterActivity"
             android:label="@string/title_activity_register">

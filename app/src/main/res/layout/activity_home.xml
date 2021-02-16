@@ -4,42 +4,73 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/black"
     tools:context=".HomeActivity">
 
     <Button
-        android:id="@+id/userSettingsButton"
-        android:layout_width="85dp"
-        android:layout_height="56dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="4dp"
-        android:text="@string/settings"
-        android:textSize="10sp"
+        android:id="@+id/myTeamButton"
+        android:layout_width="116dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="79dp"
+        android:layout_marginEnd="16dp"
+        android:text="My Team"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toStartOf="@+id/editFavButton"
+        app:layout_constraintStart_toEndOf="@+id/myPlayerButton"
+        app:layout_constraintTop_toBottomOf="@+id/addTeamButton" />
+
+    <Button
+        android:id="@+id/editFavButton"
+        android:layout_width="116dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="9dp"
+        android:layout_marginTop="79dp"
+        android:layout_marginEnd="8dp"
+        android:text="Edit Favorites"
+        android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toEndOf="@+id/myTeamButton"
+        app:layout_constraintTop_toBottomOf="@+id/searchGameButton" />
+
+    <Button
+        android:id="@+id/userSettingsButton"
+        android:layout_width="116dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="147dp"
+        android:layout_marginEnd="148dp"
+        android:layout_marginBottom="207dp"
+        android:text="@string/settings"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/searchGameButton"
-        android:layout_width="75dp"
-        android:layout_height="55dp"
-        android:layout_marginStart="38dp"
-        android:layout_marginTop="16dp"
+        android:layout_width="116dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="9dp"
+        android:layout_marginTop="34dp"
+        android:layout_marginEnd="8dp"
         android:text="@string/search_game"
-        android:textSize="10sp"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/addTeamButton"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/homePageTitleTextView" />
 
     <Button
         android:id="@+id/addTeamButton"
-        android:layout_width="73dp"
-        android:layout_height="56dp"
-        android:layout_marginStart="22dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="38dp"
+        android:layout_width="116dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="34dp"
+        android:layout_marginEnd="16dp"
         android:text="@string/add_team"
-        android:textSize="10sp"
+        android:textSize="18sp"
         app:layout_constraintEnd_toStartOf="@+id/searchGameButton"
         app:layout_constraintStart_toEndOf="@+id/addPlayerButton"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/homePageTitleTextView" />
 
     <androidx.core.widget.NestedScrollView
         android:id="@+id/nestedScrollView"
@@ -64,12 +95,42 @@
 
     <Button
         android:id="@+id/addPlayerButton"
-        android:layout_width="73dp"
-        android:layout_height="56dp"
+        android:layout_width="116dp"
+        android:layout_height="80dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="34dp"
+        android:layout_marginEnd="15dp"
         android:text="@string/add_player"
-        android:textSize="10sp"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toStartOf="@+id/addTeamButton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/homePageTitleTextView" />
+
+    <Button
+        android:id="@+id/myPlayerButton"
+        android:layout_width="116dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="79dp"
+        android:layout_marginEnd="15dp"
+        android:text="My Player"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toStartOf="@+id/myTeamButton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addPlayerButton" />
+
+    <TextView
+        android:id="@+id/homePageTitleTextView"
+        android:layout_width="197dp"
+        android:layout_height="71dp"
+        android:layout_marginStart="107dp"
+        android:layout_marginTop="38dp"
+        android:layout_marginEnd="107dp"
+        android:text="NBA Stats"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="30dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
