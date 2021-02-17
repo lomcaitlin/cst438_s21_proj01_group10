@@ -9,7 +9,10 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.room.Room;
 
+import edu.csumb.caitlin.lo.cst438_s21_proj01_group10.db.AppDAO;
+import edu.csumb.caitlin.lo.cst438_s21_proj01_group10.db.AppDatabase;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -21,7 +24,10 @@ public class AddTeamActivity extends AppCompatActivity {
     private TextView textViewTeamResult;
     private EditText editTextTeamId;
     private Button teamSearchButton;
+    private Button addFavorites;
     private int teamId;
+    private int userId;
+    private AppDAO appDao;
 
 
     @Override
@@ -29,9 +35,14 @@ public class AddTeamActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_team);
 
+        getDB();
+        getUserId();
+
         textViewTeamResult = findViewById(R.id.textViewGameResult);
         editTextTeamId = findViewById(R.id.editTextGameId);
         teamSearchButton = findViewById(R.id.gameSearchButton);
+        addFavorites = findViewById(R.id.addFavoritesButton);
+        addFavorites.setVisibility(View.INVISIBLE);
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://www.balldontlie.io/")
@@ -61,6 +72,7 @@ public class AddTeamActivity extends AppCompatActivity {
                                 content += "Abbreviation: " + post.getAbbreviation() + "\n";
                                 content += "Conference: " + post.getConference() + "\n";
                                 textViewTeamResult.append(content);
+                                addFavorites.setVisibility(View.VISIBLE);
 
                         }
 
@@ -78,11 +90,20 @@ public class AddTeamActivity extends AppCompatActivity {
 
     }
 
+    private void getUserId(){
+        userId = getIntent().getIntExtra("userId",-1);
+    }
 
+    private void getDB() {
+        appDao = Room.databaseBuilder(this, AppDatabase.class, AppDatabase.DB_NAME)
+                .allowMainThreadQueries()
+                .build()
+                .getAppDAO();
+    }
 
-    public static Intent getIntent(Context context, int id) {
+    public static Intent getIntent(Context context, int userId) {
         Intent intent = new Intent(context, AddTeamActivity.class);
-        intent.putExtra("id", id);
+        intent.putExtra("id", userId);
         return intent;
     }
 }
