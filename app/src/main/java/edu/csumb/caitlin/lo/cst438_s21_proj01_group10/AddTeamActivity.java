@@ -99,12 +99,12 @@ public class AddTeamActivity extends AppCompatActivity {
                 teamId = Integer.parseInt(value);
 
                 if (appDao.getFavoriteByPrimaryKey(userId,"teams", Integer.toString(teamId)) != null) {
-                    Toast.makeText(AddTeamActivity.this, "Already added to favorites", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(AddTeamActivity.this, "Already in your favorites", Toast.LENGTH_SHORT).show();
                 }
                 else{
                     Favorites addTeam = new Favorites(userId, "teams", Integer.toString(teamId));
                     appDao.insert(addTeam);
-                    Toast.makeText(AddTeamActivity.this, "Added to favorites", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(AddTeamActivity.this, "Added to your favorites", Toast.LENGTH_SHORT).show();
                 }
             }
         });
