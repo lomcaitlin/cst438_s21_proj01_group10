@@ -8,8 +8,6 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Room;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import edu.csumb.caitlin.lo.cst438_s21_proj01_group10.db.AppDAO;
@@ -62,7 +60,7 @@ public class MyPlayerActivity extends AppCompatActivity {
      * Connect display elements to variables
      */
     private void connectToDisplay() {
-        myPlayers = findViewById(R.id.my_players_view);
+        myPlayers = findViewById(R.id.myTeamTextView);
     }
 
     /**
