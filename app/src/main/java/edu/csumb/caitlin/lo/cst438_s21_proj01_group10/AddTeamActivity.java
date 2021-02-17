@@ -37,7 +37,10 @@ public class AddTeamActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_team);
 
-        getDB();
+        appDao = Room.databaseBuilder(this, AppDatabase.class, AppDatabase.DB_NAME)
+                .allowMainThreadQueries()
+                .build()
+                .getAppDAO();
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://www.balldontlie.io/")
@@ -59,8 +62,10 @@ public class AddTeamActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 textViewTeamResult.setText("");
+                String value = editTextTeamId.getText().toString();
+                teamId = Integer.parseInt(value);
 
-                Call<TeamPost> call = nbaApi.getTeams(getTeamId());
+                Call<TeamPost> call = nbaApi.getTeams(teamId);
 
                 call.enqueue(new Callback<TeamPost>() {
                     @Override
@@ -90,7 +95,17 @@ public class AddTeamActivity extends AppCompatActivity {
         addFavorites.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                addToFavorites(getTeamId());
+                String value = editTextTeamId.getText().toString();
+                teamId = Integer.parseInt(value);
+
+                if (appDao.getFavoriteByPrimaryKey(userId,"teams", Integer.toString(teamId)) != null) {
+                    Toast.makeText(AddTeamActivity.this, "Already added to favorites", Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    Favorites addTeam = new Favorites(userId, "teams", Integer.toString(teamId));
+                    appDao.insert(addTeam);
+                    Toast.makeText(AddTeamActivity.this, "Added to favorites", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
@@ -98,38 +113,12 @@ public class AddTeamActivity extends AppCompatActivity {
 
     }
 
-    private void addToFavorites(Integer teamId) {
-        if (userId < 0) {
-            Toast.makeText(AddTeamActivity.this, "Add failure: not signed in", Toast.LENGTH_SHORT).show();
-            startActivity(MainActivity.getIntent(getApplicationContext()));
-            return;
-        } else{
-            Favorites addTeam = new Favorites(userId, "teams", teamId.toString());
-            appDao.insert(addTeam);
-            Toast.makeText(AddTeamActivity.this, "Added to favorites", Toast.LENGTH_SHORT).show();
-        }
-    }
 
-
-    private int getTeamId(){
-        String value = editTextTeamId.getText().toString();
-        teamId = Integer.parseInt(value);
-//        if(editTextTeamId.getText().toString() == null){
-//            return -1;
-//        }
-        return teamId;
-    }
 
     private void getUserId(){
         userId = getIntent().getIntExtra("userId",-1);
     }
 
-    private void getDB() {
-        appDao = Room.databaseBuilder(this, AppDatabase.class, AppDatabase.DB_NAME)
-                .allowMainThreadQueries()
-                .build()
-                .getAppDAO();
-    }
 
     public static Intent getIntent(Context context, int userId) {
         Intent intent = new Intent(context, AddTeamActivity.class);
