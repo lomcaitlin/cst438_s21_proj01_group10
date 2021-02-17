@@ -80,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
      * Connect to db
      */
     private void getDB() {
-        appDao = Room.databaseBuilder(this, AppDatabase.class, "cst438_group10.db")
+        appDao = Room.databaseBuilder(this, AppDatabase.class, AppDatabase.DB_NAME)
                 .allowMainThreadQueries()
                 .build()
                 .getAppDAO();

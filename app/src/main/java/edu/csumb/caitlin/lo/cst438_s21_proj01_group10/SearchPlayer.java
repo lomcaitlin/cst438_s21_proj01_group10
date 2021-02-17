@@ -49,9 +49,9 @@ public class SearchPlayer extends AppCompatActivity {
         setContentView(R.layout.activity_search_player);
 
         getDB();
-        getUserId();
         buildRetrofit();
         getInitialPlayers();
+        getUserId();
         connectToDisplay();
 
         search.setOnClickListener(new View.OnClickListener() {
@@ -196,24 +196,14 @@ public class SearchPlayer extends AppCompatActivity {
             Toast.makeText(SearchPlayer.this, "Add failure: not signed in", Toast.LENGTH_SHORT).show();
             startActivity(MainActivity.getIntent(getApplicationContext()));
             return;
-        } else if (!favoriteExists(playerId)){
+        } else if (appDao.getFavoriteByPrimaryKey(userId, "players", playerId.toString()) != null) {
+            Toast.makeText(SearchPlayer.this, "Already added to favorites", Toast.LENGTH_SHORT).show();
+            return;
+        } else {
             Favorites addPlayer = new Favorites(userId, "players", playerId.toString());
             appDao.insert(addPlayer);
             Toast.makeText(SearchPlayer.this, "Added to favorites", Toast.LENGTH_SHORT).show();
         }
-    }
-
-    /**
-     * If favorite already exists, return true
-     * @param playerId
-     * @return
-     */
-    private boolean favoriteExists(Integer playerId) {
-        if (appDao.getFavoriteByPrimaryKey(userId, "players", playerId.toString()) != null) {
-            Toast.makeText(SearchPlayer.this, "Already added to favorites", Toast.LENGTH_SHORT).show();
-            return true;
-        }
-        return false;
     }
 
     /**
