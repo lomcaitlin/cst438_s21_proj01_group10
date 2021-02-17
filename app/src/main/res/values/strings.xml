@@ -13,4 +13,5 @@
     <string name="add_player">Add Player</string>
     <string name="search_player_search">Search Player Name...</string>
     <string name="add">Add</string>
+    <string name="my_player">My Players</string>
 </resources>

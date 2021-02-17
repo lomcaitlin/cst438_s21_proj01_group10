@@ -80,7 +80,7 @@ public class RegisterActivity extends AppCompatActivity {
      * connect to AppDAO
      */
     private void getDB() {
-        appDao = Room.databaseBuilder(this, AppDatabase.class, "cst438_group10.db")
+        appDao = Room.databaseBuilder(this, AppDatabase.class, AppDatabase.DB_NAME)
                 .allowMainThreadQueries()
                 .build()
                 .getAppDAO();
