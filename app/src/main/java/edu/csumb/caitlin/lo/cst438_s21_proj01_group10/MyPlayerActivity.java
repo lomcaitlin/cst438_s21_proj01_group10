@@ -60,7 +60,7 @@ public class MyPlayerActivity extends AppCompatActivity {
      * Connect display elements to variables
      */
     private void connectToDisplay() {
-        myPlayers = findViewById(R.id.myTeamTextView);
+        myPlayers = findViewById(R.id.my_players_view);
     }
 
     /**

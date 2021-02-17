@@ -8,8 +8,6 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Room;
 
-import org.w3c.dom.Text;
-
 import java.util.List;
 
 import edu.csumb.caitlin.lo.cst438_s21_proj01_group10.db.AppDAO;
@@ -45,7 +43,7 @@ public class MyTeamActivity extends AppCompatActivity {
 
         getUserId();
 
-        myTeamTextView = findViewById(R.id.myTeamTextView);
+        myTeamTextView = findViewById(R.id.my_players_view);
 
         List<Favorites> favTeam = appDao.getFavoritesByUserId(userId);
         for(Favorites fav : favTeam){
