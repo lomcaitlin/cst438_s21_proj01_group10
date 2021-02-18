@@ -18,4 +18,5 @@
     <string name="password">New Password</string>
     <string name="save">Save Changes</string>
     <string name="edit_fav">Edit Favorites</string>
+    <string name="go">Go</string>
 </resources>
