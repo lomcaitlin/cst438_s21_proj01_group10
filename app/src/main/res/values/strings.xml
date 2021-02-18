@@ -14,4 +14,7 @@
     <string name="search_player_search">Search Player Name...</string>
     <string name="add">Add</string>
     <string name="my_player">My Players</string>
+    <string name="user_settings">User Settings</string>
+    <string name="password">New Password</string>
+    <string name="save">Save Changes</string>
 </resources>

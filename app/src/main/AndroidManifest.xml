@@ -20,6 +20,7 @@
         <activity android:name=".SearchPlayer"></activity>
         <activity android:name=".EditFavoritesActivity"></activity>
         <activity android:name=".MyPlayerActivity"></activity>
+        <activity android:name=".UserSettings"></activity>
         <activity android:name=".MyTeamActivity"></activity>
         <activity
             android:name=".RegisterActivity"
