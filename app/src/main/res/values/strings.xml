@@ -19,4 +19,6 @@
     <string name="save">Save Changes</string>
     <string name="edit_fav">Edit Favorites</string>
     <string name="go">Go</string>
+    <string name="delete">Delete</string>
+    <string name="enter_favorite_id">Enter favorite ID</string>
 </resources>
