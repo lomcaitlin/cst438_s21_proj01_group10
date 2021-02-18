@@ -102,7 +102,8 @@ public class MyPlayerActivity extends AppCompatActivity {
                 }
                 PlayerPost player = response.body();
                 String info = "";
-                info += "\nPlayer Name: " + player.getFirst_name() + " " + player.getLast_name() + "\n";
+                info += "\nID: " + playerId + "\n";
+                info += "Player Name: " + player.getFirst_name() + " " + player.getLast_name() + "\n";
                 if (player.getHeight_inches() != null && player.getHeight_feet() != null) {
                     info += "Height: " + player.getHeight_feet() + "\' " + player.getHeight_inches() + "\"\n";
                 }

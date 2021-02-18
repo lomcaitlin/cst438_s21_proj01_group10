@@ -57,6 +57,7 @@ public class MyTeamActivity extends AppCompatActivity {
                         TeamPost post = response.body();
 
                         String content = "";
+                        content += "ID: " + teamId + "\n";
                         content += "Full Name: " + post.getFull_name() + "\n";
                         content += "City: " + post.getCity() + "\n";
                         content += "Abbreviation: " + post.getAbbreviation() + "\n";
