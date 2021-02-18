@@ -50,6 +50,14 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 getCredentials();
+
+                /**
+                 * empty username or password check
+                 */
+                if (username.matches("") || password.matches("") || passwordConf.matches("")) {
+                    Toast.makeText(RegisterActivity.this, "Empty text field", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 if (appDao.getUserByUsername(username) != null) {
                     editTextUsername.requestFocus();
                     Toast.makeText(RegisterActivity.this, "Username taken", Toast.LENGTH_SHORT).show();
