@@ -48,6 +48,14 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 getCredentials();
                 user = appDao.getUserByUsername(username);
+                
+                /**
+                 * empty username or password check
+                 */
+                if (username.matches("") || password.matches("")) {
+                    Toast.makeText(MainActivity.this, "Empty text field", Toast.LENGTH_SHORT).show();
+                    return;
+                }
 
                 //checking if there is a user
                 if (user != null) {
