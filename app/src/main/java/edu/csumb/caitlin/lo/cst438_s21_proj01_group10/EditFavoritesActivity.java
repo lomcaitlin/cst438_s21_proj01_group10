@@ -113,13 +113,13 @@ public class EditFavoritesActivity extends AppCompatActivity {
             Toast.makeText(EditFavoritesActivity.this, "Add failure: not signed in", Toast.LENGTH_SHORT).show();
             startActivity(MainActivity.getIntent(getApplicationContext()));
             return;
-        } else if (appDao.getFavoriteByPrimaryKey(userId, type, id.toString()) != null) {
-            Toast.makeText(EditFavoritesActivity.this, "Not in favorites", Toast.LENGTH_SHORT).show();
+        } else if (appDao.getFavoriteByPrimaryKey(userId, type, id.getText().toString()) == null) {
+            Toast.makeText(EditFavoritesActivity.this, "Not in favorites ", Toast.LENGTH_SHORT).show();
             return;
         } else {
-            Favorites remove = new Favorites(userId, type, id.toString());
+            Favorites remove = appDao.getFavoriteByPrimaryKey(userId, type, id.getText().toString());
             appDao.delete(remove);
-            Toast.makeText(EditFavoritesActivity.this, "Removed from favorites " + type, Toast.LENGTH_SHORT).show();
+            Toast.makeText(EditFavoritesActivity.this, "Removed from favorites ", Toast.LENGTH_SHORT).show();
         }
     }
 
